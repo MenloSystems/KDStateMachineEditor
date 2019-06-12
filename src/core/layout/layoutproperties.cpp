@@ -35,6 +35,9 @@ struct LayoutProperties::Private
     qreal regionLabelMargins;
     QSizeF regionLabelButtonBoxSize;
     bool showTransitionLabels;
+    LayoutProperties::Direction direction;
+    qreal nodeSep;
+    qreal rankSep;
 };
 
 LayoutProperties::Private::Private()
@@ -42,6 +45,9 @@ LayoutProperties::Private::Private()
     , regionLabelMargins(5.)
     , regionLabelButtonBoxSize(18., 18.)
     , showTransitionLabels(true)
+    , direction(TopToBottom)
+    , nodeSep(0.2)
+    , rankSep(0.2)
 {
     regionLabelFont.setBold(true);
 }
@@ -133,5 +139,53 @@ void LayoutProperties::setShowTransitionLabels(bool show)
 
     d->showTransitionLabels = show;
     emit showTransitionLabelsChanged(show);
+    emit changed();
+}
+
+LayoutProperties::Direction LayoutProperties::direction() const
+{
+    return d->direction;
+}
+
+void LayoutProperties::setDirection(LayoutProperties::Direction direction)
+{
+    if (d->direction == direction) {
+        return;
+    }
+
+    d->direction = direction;
+    emit directionChanged(d->direction);
+    emit changed();
+}
+
+qreal LayoutProperties::nodeSep() const
+{
+    return d->nodeSep;
+}
+
+void LayoutProperties::setNodeSep(qreal nodeSep)
+{
+    if (qFuzzyCompare(d->nodeSep, nodeSep)) {
+        return;
+    }
+
+    d->nodeSep = nodeSep;
+    emit nodeSepChanged(d->nodeSep);
+    emit changed();
+}
+
+qreal LayoutProperties::rankSep() const
+{
+    return d->rankSep;
+}
+
+void LayoutProperties::setRankSep(qreal rankSep)
+{
+    if (qFuzzyCompare(d->rankSep, rankSep)) {
+        return;
+    }
+
+    d->rankSep = rankSep;
+    emit rankSepChanged(d->rankSep);
     emit changed();
 }

@@ -42,8 +42,17 @@ class KDSME_CORE_EXPORT LayoutProperties : public QObject
     Q_PROPERTY(qreal regionLabelMargins READ regionLabelMargins WRITE setRegionLabelMargins NOTIFY regionLabelMarginsChanged FINAL)
     Q_PROPERTY(QSizeF regionLabelButtonBoxSize READ regionLabelButtonBoxSize WRITE setRegionLabelButtonBoxSize NOTIFY regionLabelButtonBoxSizeChanged FINAL)
     Q_PROPERTY(bool showTransitionLabels READ showTransitionLabels WRITE setShowTransitionLabels NOTIFY showTransitionLabelsChanged FINAL)
-
+    Q_PROPERTY(LayoutProperties::Direction direction READ direction WRITE setDirection NOTIFY directionChanged)
+    Q_PROPERTY(qreal nodeSep READ nodeSep WRITE setNodeSep NOTIFY nodeSepChanged)
+    Q_PROPERTY(qreal rankSep READ rankSep WRITE setRankSep NOTIFY rankSepChanged)
 public:
+    enum Direction {
+        TopToBottom,
+        BottomToTop,
+        LeftToRight,
+        RightToLeft
+    };
+
     explicit LayoutProperties(QObject* parent = nullptr);
     ~LayoutProperties();
 
@@ -62,12 +71,24 @@ public:
     bool showTransitionLabels() const;
     void setShowTransitionLabels(bool show);
 
+    LayoutProperties::Direction direction() const;
+    void setDirection(LayoutProperties::Direction direction);
+
+    qreal nodeSep() const;
+    void setNodeSep(qreal nodeSep);
+
+    qreal rankSep() const;
+    void setRankSep(qreal rankSep);
+
 Q_SIGNALS:
     void regionMarginsChanged(qreal);
     void regionLabelFontChanged(const QFont&);
     void regionLabelMarginsChanged(qreal);
     void regionLabelButtonBoxSizeChanged(const QSizeF&);
     void showTransitionLabelsChanged(bool);
+    void directionChanged(LayoutProperties::Direction direction);
+    void nodeSepChanged(qreal nodeSep);
+    void rankSepChanged(qreal rankSep);
     void changed();
 
 private:

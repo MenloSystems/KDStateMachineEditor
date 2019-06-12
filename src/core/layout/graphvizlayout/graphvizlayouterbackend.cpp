@@ -435,7 +435,24 @@ void GraphvizLayouterBackend::Private::openContext(const QString& id)
     _agset(m_graph, "splines", "true");
     _agset(m_graph, "pad", "0.0");
     _agset(m_graph, "dpi", "96.0");
-    _agset(m_graph, "nodesep", "0.2");
+    _agset(m_graph, "nodesep", QString::number(m_properties->nodeSep()));
+    _agset(m_graph, "ranksep", QString::number(m_properties->rankSep()));
+    switch (m_properties->direction()) {
+    case LayoutProperties::TopToBottom:
+        _agset(m_graph, "rankdir", "TB");
+        break;
+    case LayoutProperties::LeftToRight:
+        _agset(m_graph, "rankdir", "LR");
+        break;
+
+    case LayoutProperties::BottomToTop:
+        _agset(m_graph, "rankdir", "BT");
+        break;
+
+    case LayoutProperties::RightToLeft:
+        _agset(m_graph, "rankdir", "RL");
+        break;
+    }
 }
 
 void GraphvizLayouterBackend::Private::closeLayout()
