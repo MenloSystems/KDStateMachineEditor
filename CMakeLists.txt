@@ -51,12 +51,12 @@ find_package(Qt5 5.3 CONFIG REQUIRED Quick Test Widgets)
 find_package(Qt5 5.3 CONFIG REQUIRED QuickWidgets)
 include(QtInstallPaths) #to set QT_INSTALL_FOO variables
 
-find_package(Qt5RemoteObjects 5.4 CONFIG QUIET)
-set_package_properties(Qt5RemoteObjects PROPERTIES
-  TYPE OPTIONAL
-  DESCRIPTION "Qt Remote Objects module"
-  PURPOSE "Needed for the QStateMachine/QtSCXML adapter and remote debugging capabilities"
-)
+# find_package(Qt5RemoteObjects 5.4 CONFIG QUIET)
+# set_package_properties(Qt5RemoteObjects PROPERTIES
+#   TYPE OPTIONAL
+#   DESCRIPTION "Qt Remote Objects module"
+#   PURPOSE "Needed for the QStateMachine/QtSCXML adapter and remote debugging capabilities"
+# )
 if (Qt5RemoteObjects_FOUND)
     string(REPLACE "." ";" VERSION_LIST ${Qt5RemoteObjects_VERSION})
     list(GET VERSION_LIST 0 Qt5RemoteObjects_VERSION_MAJOR)
