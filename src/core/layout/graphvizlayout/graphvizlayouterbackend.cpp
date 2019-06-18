@@ -421,7 +421,7 @@ void GraphvizLayouterBackend::Private::openContext(const QString& id)
     m_elementToPointerMap.clear();
 
 #ifdef WITH_CGRAPH
-    m_graph = _agopen(id, Agdirected, &AgDefaultDisc);
+    m_graph = _agopen(id, Agdirected, nullptr);
 #else
     m_graph = _agopen(id, AGDIGRAPH);
 #endif
